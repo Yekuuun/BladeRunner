@@ -31,7 +31,7 @@ This project was made only for learning purpose. I'm not responsible if you deci
 
 🔴 Undetectable client
 
-🔴 **UNDER CONSTRUCTION**
+🔴 **UNDER CONSTRUCTION...**
 
 ---
 
