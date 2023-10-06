@@ -23,7 +23,7 @@ This project was made only for learning purpose. I'm not responsible if you deci
 
 🟢 Sending Keylogger data to server
 
-🟢Keeping logs of received data
+🟢 Keeping logs of received data
 
 🔴 Multithreads to send & receive data
 
