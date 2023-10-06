@@ -15,4 +15,18 @@ This project was made only for learning purpose. I'm not responsible if you deci
 
 ---
 
+### What i've implemented ?
+
+🟢 TCP connection between client - host
+
+🟢 Sending Keylogger data to server
+
+🟢Keeping logs of received data
+
+🔴 Multithreads to send & receive data
+
+🔴 Wan connection
+
+🔴 Undetectable client
+
 Thanks to <a href="https://github.com/ajayrandhawa">ajayrandhawa</a> for key tracing.

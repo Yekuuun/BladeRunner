@@ -3,13 +3,14 @@
 author : Yekuuun
 github : https://github.com/yekuuun
 
-entry point of client program
+entry point of server program.
 
 */
 #include <iostream>
 #include <winsock2.h>
 #include <wS2tcpip.h>
 #include <synchapi.h>
+#include "logs.hpp"
 
 void display_server_message();
 
@@ -27,6 +28,9 @@ int launch_tcp_server(){
     }
 
     display_server_message();
+
+    //path to logs folder - adpat it
+    std::string folderPath = "C:\\Users\\User\\Desktop\\BladeRunner\\server\\logs";
 
     //bind
     struct addrinfo *bind_address = NULL;
@@ -90,8 +94,25 @@ int launch_tcp_server(){
 
     while(1){
         // Receive command from the server
+        char received_command[100];
+        memset(received_command, 0, sizeof(received_command));
 
-        
+        if (recv(client_socket, received_command, sizeof(received_command), 0) == SOCKET_ERROR) {
+            perror("recv failed");
+            goto CLEANUP;
+        }
+
+        std::cout << "Received command from server: " << received_command << std::endl;
+
+        if(strcmp(received_command, "CLOSE") == 0){
+            goto CLEANUP;
+        }
+
+        int logs = create_logs(folderPath, received_command);
+
+        if(logs != 0){
+            break;
+        } 
     }
 
 

