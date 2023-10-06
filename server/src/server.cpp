@@ -3,52 +3,59 @@
 author : Yekuuun
 github : https://github.com/yekuuun
 
-this repo contains all code related to a simple UDP server receiving packets from victims.
+entry point of client program
 
 */
-
 #include <iostream>
-#include "server.hpp"
 #include <winsock2.h>
 #include <wS2tcpip.h>
 #include <synchapi.h>
 
-//prototype.
 void display_server_message();
 
-int launch_udp_server(){
-
-    //initialize socket library
+//launching tcp bladerunner server
+int launch_tcp_server(){
+    
+    //initializing winsock library
     WSADATA ws;
 
     int ws_result = WSAStartup(MAKEWORD(2,2), &ws);
 
     if(ws_result != 0){
-        std::cout << "[ERROR] while trying to initialize socket library." << std::endl;
-        return 1;
+        std::cout << "[ERROR] while trying to initialize winsock library..." << std::endl;
+        return EXIT_FAILURE;
     }
 
     display_server_message();
 
-    std::cout << "Configuring local address..." << std::endl;
+    //bind
+    struct addrinfo *bind_address = NULL;
+
+    //config local address
     struct addrinfo hints;
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET;
-    hints.ai_socktype = SOCK_DGRAM;
+    hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE;
 
-    struct addrinfo *bind_address;
-    getaddrinfo(0, "8080", &hints, &bind_address);
+    //get address
+    int getaddrinfo_result = getaddrinfo(0, "5050", &hints, &bind_address);
 
-    std::cout << "Creating socket..." << std::endl;
+    if(getaddrinfo_result != 0){
+        std::cout << "[ERROR] unable to use getaddrinfo() with error: " << WSAGetLastError() << std::endl;
+        goto CLEANUP;
+    }
+
+    //creating server socket
     SOCKET socket_listen;
-
     socket_listen = socket(bind_address->ai_family, bind_address->ai_socktype, bind_address->ai_protocol);
 
     if(socket_listen == INVALID_SOCKET){
-        std::cout << "[ERROR] while trying to create socket..." << std::endl;
+        std::cout << "[ERROR] unable to create socket..." << std::endl;
         goto CLEANUP;
     }
+
+    std::cout << "Binding socker to local address..." << std::endl;
 
     int bind_result = bind(socket_listen, bind_address->ai_addr, bind_address->ai_addrlen);
 
@@ -56,38 +63,59 @@ int launch_udp_server(){
         std::cout << "[ERROR] while trying to bind local address with socket..." << std::endl;
         goto CLEANUP;
     }
+    
+    //listen for connexion
+    int listen_result = listen(socket_listen, 1);
 
-    std::cout << "Waiting for connection..." << std::endl;
-    while(1) {
-        struct sockaddr_storage client_address;
-        socklen_t client_len = sizeof(client_address);
+    if(listen_result != 0){
+        std::cout << "[ERROR] Failed using listen() with error: " << WSAGetLastError() << std::endl;
+        goto CLEANUP;
+    }
 
-        char read[10];
-        int bytes_received = recvfrom(socket_listen, read, 1024, 0,(struct sockaddr *)&client_address, &client_len);
+   std::cout << "Waiting for client connection..." << std::endl;
+    struct sockaddr_storage client_address;
+    socklen_t client_len = sizeof(client_address);
 
-        if (bytes_received < 1) {
-            std::cout << "[ERROR] while receiving data." << std::endl;
-            goto CLEANUP;
-        }
+    SOCKET client_socket = accept(socket_listen,(struct sockaddr*) &client_address, &client_len);
 
-        std::cout << "Received: " << read << std::endl;
+    if(client_socket == INVALID_SOCKET){
+        std::cout << "[ERROR] while trying to connect client" << WSAGetLastError() << std::endl;
+        goto CLEANUP;
+    }
 
-    } //while(1)
+    std::cout << "Client Connected successfully! "<< std::endl;
+
+    //exchange part
+    char command[100];
+
+    while(1){
+        // Receive command from the server
+
+        
+    }
 
 
+    //cleaning
     CLEANUP:
         freeaddrinfo(bind_address);
 
         if(socket_listen){
             closesocket(socket_listen);
-            std::cout << "Closing socket..." << std::endl;
+            std::cout << "Closing server socket..." << std::endl;
+        }
+
+        if(client_socket){
+            closesocket(client_socket);
+            std::cout << "Closing client socket..." << std::endl;
         }
 
         WSACleanup();
+        std::cout << "Finished." << std::endl;
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
+//display main server message.
 void display_server_message(){
         std::cout << "\x1b[35m"
               << " ____  _           _      ____                              " << std::endl
@@ -99,4 +127,3 @@ void display_server_message(){
         std::cout << "\n" << std::endl;
         std::cout << "Launching server...\n" << std::endl;
 }
-

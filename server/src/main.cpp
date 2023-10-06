@@ -10,7 +10,7 @@ Entry point of server.
 #include "server.hpp"
 
 int main(){
-    int server = launch_udp_server();
+    int server = launch_tcp_server();
 
     if(server != 0){
         return EXIT_FAILURE;
