@@ -14,7 +14,6 @@ std::string current_date_string() {
     std::time_t t = std::time(nullptr);
     std::tm tm = *std::localtime(&t);
 
-    // Create a std::stringstream for formatting
     std::stringstream ss;
     ss << std::setfill('0');
     ss << std::setw(4) << (tm.tm_year + 1900) << "-";
@@ -28,7 +27,6 @@ int create_logs(const std::string& folderPath, const char *data){
     std::time_t t = std::time(nullptr);
     std::tm tm = *std::localtime(&t);
 
-    // Créer un std::stringstream pour le formatage du nom de fichier
     std::stringstream filename;
     filename << folderPath << "\\";
     filename << std::setw(2) << tm.tm_mday << "-";
@@ -38,7 +36,6 @@ int create_logs(const std::string& folderPath, const char *data){
 
     std::string filePath = filename.str();
 
-    // Ouvrir le fichier en mode écriture (crée le fichier s'il n'existe pas)
     std::ofstream outputFile(filePath, std::ios::app);
 
     if (outputFile.is_open()) {
