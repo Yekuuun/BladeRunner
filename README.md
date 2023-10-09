@@ -25,6 +25,8 @@ This project was made only for learning purpose. I'm not responsible if you deci
 
 For server side code, you have to chose a path to a valid folder who will keep the logs of the program in `server/sr/server.cpp`
 
+---
+
 ### What i've implemented ?
 
 🟢 TCP connection between client - host
@@ -33,7 +35,6 @@ For server side code, you have to chose a path to a valid folder who will keep t
 
 🟢 Keeping logs of received data
 
-🔴 **UNDER CONSTRUCTION...**
 
 ---
 
