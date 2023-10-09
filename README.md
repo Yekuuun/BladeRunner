@@ -1,11 +1,11 @@
 ```C
-                         ____  _           _      ____                              
-                        | __ )| | __ _  __| | ___|  _ \ _   _ _ __  _ __   ___ _ __ 
-                        |  _ \| |/ _` |/ _` |/ _ \ |_) | | | | '_ \| '_ \ / _ \ '__|
-                        | |_) | | (_| | (_| |  __/  _ <| |_| | | | | | | |  __/ |   
-                        |____/|_|\__,_|\__,_|\___|_| \_\\__,_|_| |_|_| |_|\___|_|                          
+                       ____  _           _      ____                              
+                      | __ )| | __ _  __| | ___|  _ \ _   _ _ __  _ __   ___ _ __ 
+                      |  _ \| |/ _` |/ _` |/ _ \ |_) | | | | '_ \| '_ \ / _ \ '__|
+                      | |_) | | (_| | (_| |  __/  _ <| |_| | | | | | | |  __/ |   
+                      |____/|_|\__,_|\__,_|\___|_| \_\\__,_|_| |_|_| |_|\___|_|                          
 
-                                Simple keylogger fully written in C++
+                              Simple keylogger fully written in C++
                                                          
 ``` 
 **Simple keylogger developped by my hand sending data through sockets to dedicated server keeping logs of clients. This project was fully developped in C++**
