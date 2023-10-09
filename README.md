@@ -17,6 +17,14 @@ This project was made only for learning purpose. I'm not responsible if you deci
 
 ---
 
+### Compile client ?
+
+`g++ -o client bladerunner.cpp -lws2_32`
+
+### Warning 
+
+For server side code, you have to chose a path to a valid folder who will keep the logs of the program in `server/sr/server.cpp`
+
 ### What i've implemented ?
 
 🟢 TCP connection between client - host
@@ -24,12 +32,6 @@ This project was made only for learning purpose. I'm not responsible if you deci
 🟢 Sending Keylogger data to server
 
 🟢 Keeping logs of received data
-
-🔴 Multithreads to send & receive data
-
-🔴 Wan connection
-
-🔴 Undetectable client
 
 🔴 **UNDER CONSTRUCTION...**
 

@@ -30,7 +30,7 @@ int launch_tcp_server(){
     display_server_message();
 
     //path to logs folder - adpat it
-    std::string folderPath = "C:\\Users\\User\\Desktop\\BladeRunner\\server\\logs";
+    std::string folderPath = "YOUR FOLDER PATH";
 
     //bind
     struct addrinfo *bind_address = NULL;
